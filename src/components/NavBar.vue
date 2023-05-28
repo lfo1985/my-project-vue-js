@@ -7,7 +7,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <a class="nav-link text-white" href="#"></a>
+            <router-link to="/" class="nav-link text-white">
+              Home
+            </router-link>
           </ul>
         </div>
       </div>

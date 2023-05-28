@@ -1,18 +1,13 @@
 <template>
     <div class="container-fluid w-75 mt-3">
-        <ItensProjetos />
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 
-import ItensProjetos from '@/components/ItensProjetos';
-
 export default {
-  name: 'ContainerFluid',
-  components: {
-    ItensProjetos
-  }
+  name: 'ContainerFluid'
 }
 
 </script>

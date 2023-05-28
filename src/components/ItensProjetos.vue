@@ -7,57 +7,64 @@
                 Projetos
             </b>
         </h5>
-        <button class="btn btn-success mt-2 mb-2">
-            <font-awesome-icon icon="plus" />
-            adicionar novo projeto
-        </button>
-        <ul class="list-group mt-3 mb-3">
+        <router-link to="/adiciona-projeto">
+            <button class="btn btn-success mt-2 mb-2">
+                <font-awesome-icon icon="plus" />
+                adicionar novo projeto
+            </button>
+        </router-link>
+        <ul v-if="itensProjetos.length > 0" class="list-group mt-3 mb-3">
             <li 
-                v-for="projeto in projetos"
+                v-for="projeto in itensProjetos"
                 class="list-group-item d-flex align-items-center justify-content-between"
             >
                 {{  projeto.titulo  }}
                 <div class="d-flex">
-                    <button @click="editar(projeto)" class="btn btn-sm btn-info me-1 text-white">
+                    <router-link 
+                        :to="{path: '/edita-projeto/'+projeto.id}" 
+                        class="btn btn-sm btn-info me-1 text-white"
+                    >
                         <font-awesome-icon icon="pen-to-square" />
-                    </button>
+                    </router-link>
                     <button @click="apagar(projeto)" class="btn btn-sm btn-danger text-white">
                         <font-awesome-icon icon="trash" />
                     </button>
                 </div>
             </li>
         </ul>
+        <div v-else>
+            <small class="text-danger">Nenhum projeto encontrado!</small>
+        </div>
     </div>
 </template>
 
 <script>
 
+import projetos from '../data.js';
+
 export default {
     name: 'ItensProjetos',
     data() {
         return {
-            projetos: [
-                {
-                    id: 1,
-                    titulo: 'Teste de titulo'
-                },
-                {
-                    id: 2,
-                    titulo: 'Outro projeto kkkk'
-                }
-            ]        
+            itensProjetos: projetos
         }
     },
     methods: {
-        editar: function(projeto){
-            return projeto;
+        getIndex: function(projeto){
+            return this.itensProjetos.findIndex(item => item.id == projeto.id);
         },
         apagar: function(projeto){
-            if(confirm('Deseja apagar este projeto?')){
-                return projeto;
+            if(confirm('Deseja apagar este registro?')){
+                this.itensProjetos.splice(this.getIndex(projeto), 1);
+                localStorage.setItem('projetos', JSON.stringify(this.itensProjetos));
             }
         }
     },
+    mounted(){
+        if(localStorage.getItem('projetos')){
+            this.itensProjetos = JSON.parse(localStorage.getItem('projetos'));
+        }
+    }
 }
 
 </script>
