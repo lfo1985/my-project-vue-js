@@ -40,30 +40,30 @@
 
 <script>
 
-import projetos from '../data.js';
-
 export default {
     name: 'ItensProjetos',
     data() {
         return {
-            itensProjetos: projetos
+            itensProjetos: []
         }
     },
     methods: {
         getIndex: function(projeto){
             return this.itensProjetos.findIndex(item => item.id == projeto.id);
         },
+        getItensProjetos: async function(){
+            var itensProjetos = [];
+            await this.axios.get('/data.json').then(response => itensProjetos = response.data );
+            this.itensProjetos = itensProjetos;
+        },
         apagar: function(projeto){
             if(confirm('Deseja apagar este registro?')){
                 this.itensProjetos.splice(this.getIndex(projeto), 1);
-                localStorage.setItem('projetos', JSON.stringify(this.itensProjetos));
             }
         }
     },
     mounted(){
-        if(localStorage.getItem('projetos')){
-            this.itensProjetos = JSON.parse(localStorage.getItem('projetos'));
-        }
+        this.getItensProjetos();
     }
 }
 

@@ -14,8 +14,11 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ItensProjetos from '@/components/ItensProjetos';
 import FormProjeto from '@/components/FormProjeto'
 
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 library.add(faDiagramProject);
 library.add(faPenToSquare);
@@ -49,4 +52,5 @@ const router = createRouter({
 createApp(App)
     .component("font-awesome-icon", FontAwesomeIcon)
     .use(router)
+    .use(VueAxios, axios)
     .mount('#app');
