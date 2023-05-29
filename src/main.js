@@ -4,15 +4,18 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faDiagramProject } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { 
+    faDiagramProject, 
+    faInfo, 
+    faPenToSquare,
+    faPlus,
+    faArrowLeftLong,
+    faCheck,
+    faInfoCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 import ItensProjetos from '@/components/ItensProjetos';
-import FormProjeto from '@/components/FormProjeto'
+import InfoProjeto from '@/components/InfoProjeto'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
@@ -22,10 +25,11 @@ import VueAxios from 'vue-axios';
 
 library.add(faDiagramProject);
 library.add(faPenToSquare);
-library.add(faTrash);
 library.add(faPlus);
 library.add(faArrowLeftLong);
 library.add(faCheck);
+library.add(faInfo);
+library.add(faInfoCircle);
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -36,14 +40,14 @@ const router = createRouter({
             component: ItensProjetos
         },
         {
-            name: 'EditaProjeto',
-            path: '/edita-projeto/:id',
-            component: FormProjeto
+            name: 'InfoProjeto',
+            path: '/info-projeto/:id',
+            component: InfoProjeto
         },
         {
             name: 'AdicionaProjeto',
             path: '/adiciona-projeto',
-            component: FormProjeto
+            component: InfoProjeto
         }
     ]
     
