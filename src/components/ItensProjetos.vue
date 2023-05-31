@@ -10,7 +10,11 @@
         </h5>
 
         <ul v-if="itensProjetos.length > 0" class="list-group mt-3 mb-3">
-            <ItemProjeto :itens-projetos="itensProjetos" />
+            <ItemProjeto 
+                v-for="projeto in itensProjetos" 
+                :key="projeto.id" 
+                :projeto="projeto"
+            />
         </ul>
 
         <div v-else>
@@ -38,9 +42,15 @@ export default {
     },
     methods: {
         getItensProjetos: async function(){
+
             var itensProjetos = [];
-            await this.axios.get('/data.json').then(response => itensProjetos = response.data );
+
+            await this
+                .axios.get('/data.json')
+                .then(response => itensProjetos = response.data );
+
             this.itensProjetos = itensProjetos;
+            
         }
     },
     components: {

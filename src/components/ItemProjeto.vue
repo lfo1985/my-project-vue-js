@@ -1,9 +1,6 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <template>
-    <li 
-        v-for="projeto in itensProjetos"
-        class="list-group-item d-flex align-items-center justify-content-between"
-    >
+    <li class="list-group-item d-flex align-items-center justify-content-between">
         <span>
             <!-- Uma forma diferente de incluir o conteúdo dentro da tag fora do ecopo da mesma  -->
             <span class="d-block me-2" v-html="projeto.titulo"></span>
@@ -27,7 +24,7 @@
 export default {
     name: 'ItemProjeto',
     props: {
-        itensProjetos: Array
+        projeto: Object
     }
 }
 
