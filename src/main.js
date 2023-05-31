@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { createStore } from 'vuex';
 import App from './App.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 
@@ -53,8 +54,22 @@ const router = createRouter({
     
 });
 
+const store = createStore({
+    state(){
+        return {
+            texto: 'Bla Bla!'
+        }
+    },
+    getters: {
+        getTexto(state){
+            return state.texto;
+        }
+    }
+});
+
 createApp(App)
     .component("font-awesome-icon", FontAwesomeIcon)
+    .use(store)
     .use(router)
     .use(VueAxios, axios)
     .mount('#app');

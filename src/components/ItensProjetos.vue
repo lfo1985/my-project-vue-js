@@ -26,6 +26,12 @@
         <h6 class="fw-bold">JSON de dados</h6>
         
         <div>{{ dadosComputados }}</div>
+
+        <hr>
+
+        <h6 class="fw-bold">VueX</h6>
+        <p>Dados vindo do store: {{  getTexto  }}</p>
+        <button @click="alteraTexto" class="btn btn-success">Teste para alterar o texto</button>
     </div>
 </template>
 
@@ -37,7 +43,8 @@ export default {
     name: 'ItensProjetos',
     data() {
         return {
-            itensProjetos: []
+            itensProjetos: [],
+            textoAlterado: null
         }
     },
     methods: {
@@ -51,6 +58,9 @@ export default {
 
             this.itensProjetos = itensProjetos;
             
+        },
+        alteraTexto: function() {
+            this.$store.state.texto = 'Aloha!';
         }
     },
     components: {
@@ -62,6 +72,9 @@ export default {
     computed: {
         dadosComputados(){
             return this.itensProjetos;
+        },
+        getTexto(){
+            return this.$store.getters.getTexto;
         }
     }
 }
