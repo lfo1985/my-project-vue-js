@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid w-75 mt-3">
-        <router-view></router-view>
+        <router-view />
     </div>
 </template>
 

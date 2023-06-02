@@ -3,7 +3,7 @@
     <div class="text-start">
 
         <h5 class="bg-light d-block p-2 rounded">
-            <font-awesome-icon icon="diagram-project" />
+            <fa icon="diagram-project" />
             <b>
                 Projetos
             </b>
@@ -60,7 +60,17 @@ export default {
             
         },
         alteraTexto: function() {
-            this.$store.state.texto = 'Aloha!';
+            /**
+             * Método utilizado para realizar a alteração no store (vuex)
+             * Ciclo:   action (dispatch) -> 
+             *          mutator (alteraTexto) -> 
+             *          [realiza a altereação] ->
+             *          getter (this.$store.getters.getTexto) retorna os dados alterados
+             */
+            this.$store.dispatch({
+                type: 'alteraTexto',
+                texto: 'Bruto pra caramba!'
+            });
         }
     },
     components: {

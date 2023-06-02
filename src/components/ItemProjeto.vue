@@ -12,7 +12,7 @@
                 :to="{name: 'InfoProjeto', params: {id: projeto.id}}" 
                 class="btn btn-info me-1 text-white rounded-5"
             >
-                <font-awesome-icon icon="info-circle" />
+                <fa icon="info-circle" />
                 Ver mais informações
             </router-link>
         </div>

@@ -2,7 +2,7 @@
     <div class="text-start">
 
         <h5 class="bg-light d-block p-2 rounded">
-            <font-awesome-icon icon="info-circle" />
+            <fa icon="info-circle" />
             <b>
                 Informações do projetos
             </b>
@@ -15,7 +15,7 @@
         
         <div class="text-center">
             <router-link to="/" class="btn btn-sm btn-dark me-1 text-white">
-                <font-awesome-icon icon="arrow-left-long" />
+                <fa icon="arrow-left-long" />
                 Voltar
             </router-link>
         </div>
