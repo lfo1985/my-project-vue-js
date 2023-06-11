@@ -10,8 +10,11 @@ import store from './store';
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import config from './config';
+
 
 createApp(App)
+    .provide('config', config)
     .component("fa", icons)
     .use(store)
     .use(router)

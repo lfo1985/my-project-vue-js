@@ -6,7 +6,9 @@ const store = createStore({
     state(){
         return {
             logado: Token().get() || false,
-            rotaAnterior: null
+            rotaAnterior: null,
+            loader: false,
+            usuario: null
         }
     },
     getters: {
@@ -15,6 +17,12 @@ const store = createStore({
         },
         rotaAnterior(state){
             return state.rotaAnterior;
+        }, 
+        loader(state){
+            return state.loader;
+        }, 
+        usuario(state){
+            return state.usuario;
         }   
     },
     mutations: {
@@ -23,6 +31,12 @@ const store = createStore({
         },
         alteraRotaAnterior(state, value){
             state.rotaAnterior = value;
+        },
+        alteraEstadoLoader(state, value){
+            state.loader = value;
+        },
+        alteraEstadoUsuario(state, value){
+            state.usuario = value;
         }
     },
     actions: {
@@ -31,6 +45,12 @@ const store = createStore({
         },
         defineRotaAnterior({commit}, obj){
             commit('alteraRotaAnterior', obj.rota);
+        },
+        defineEstadoLoader({commit}, obj){
+            commit('alteraEstadoLoader', obj.loader);
+        },
+        defineEstadoUsuario({commit}, obj){
+            commit('alteraEstadoUsuario', obj.usuario);
         }
     }
 });

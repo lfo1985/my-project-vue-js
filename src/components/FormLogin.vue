@@ -16,6 +16,7 @@
 <script>
     import AxiosHttp from '@/helpers/AxiosHttp';
     export default {
+        inject: ['config'],
         name: 'FormLogin',
         data(){
             return {
@@ -28,27 +29,30 @@
         },
         methods: {
             login: function(){
+
                 this.loader = true;
+                
                 const sucesso = r => {
                     if(r.sucesso){
-                        this.$store.dispatch({
-                            type: 'defineLogado',
-                            logado: true
-                        });
-                        location.reload();
+                        this.$store.dispatch(this.config.LOGIN);
+                        this.$store.dispatch({ type: 'defineEstadoUsuario', usuario: r.usuario });
+                        // location.reload();
+                        this.$router.push('/');
                     } else {
                         alert(r.msg);
                     }
                     this.loader = false;
                 }
+
                 const erro = e => {
                     alert(e.msg);
                     this.loader = false;
                 }
+
                 AxiosHttp().login({
                     email: this.dadosLogin.email,
                     password: this.dadosLogin.password
-                },sucesso, erro);
+                }, sucesso, erro);
             },
         }
     };

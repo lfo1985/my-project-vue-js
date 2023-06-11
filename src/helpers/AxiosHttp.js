@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Token from './Token';
 import config from '@/config';
+import Usuario from './Usuario';
 
 function AxiosHttp(){
 
@@ -13,7 +14,7 @@ function AxiosHttp(){
 
     function get(route, callback = null, callbackErro = null){
         axios
-            .get(config.baseURL + route, options)
+            .get(config.BASE_URL + route, options)
             .then(response => {
                 if(callback != null){
                     callback(response.data);
@@ -21,13 +22,18 @@ function AxiosHttp(){
             }).catch(e => {
                 if(callbackErro != null){
                     callbackErro(e.response.data);
+                } else {
+                    alert(e.response.data.msg);
+                    window.location.href = '#/';
+                    Token().remove();
+                    Usuario().remove();
                 }
             });
     }
 
     function post(route, data = {}, callback = null, callbackErro = null){
         axios
-            .post(config.baseURL + route, data, options)
+            .post(config.BASE_URL + route, data, options)
             .then(function(response){
                 if(callback != null){
                     callback(response.data);
@@ -35,27 +41,29 @@ function AxiosHttp(){
             }).catch(e => {
                 if(callbackErro != null){
                     callbackErro(e.response.data);
+                } else {
+                    alert(e.response.data.msg);
+                    window.location.href = '#/';
+                    Token().remove();
+                    Usuario().remove();
                 }
             });
     }
 
-    function login(credentials, callback = null){
+    function login(credentials, callback = null, callbackErro = null){
         axios
-            .post(config.baseURL + 'login', {
+            .post(config.BASE_URL + 'login', {
                 email: credentials.email,
                 password: credentials.password
             }).then(function(response){
-                if(!response.data.token){
-                    alert(response.data.msg);
-                } else {
-                    Token().set(response.data.token);
-                    if(callback != null){
-                        callback(response.data);
-                    }
+                Token().set(response.data.token);
+                Usuario().set(response.data.usuario);
+                if(callback != null){
+                    callback(response.data);
                 }
             }).catch(e => {
-                if(callback != null){
-                    callback(e.response.data);
+                if(callbackErro != null){
+                    callbackErro(e);
                 }
             });
     }
