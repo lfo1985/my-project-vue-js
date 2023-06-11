@@ -1,10 +1,11 @@
 <template>
-  <FormLogin v-if="!this.$store.getters.logado" />
-  <template v-else>
-    <NavBar />
-	<button @click="logout" class="btn btn-info text-white mt-2 mb-2">Logout</button>
-    <ContainerFluid />
-  </template>
+	<h5 v-if="loader">Carregando...</h5>
+	<FormLogin v-if="!this.$store.getters.logado" />
+	<template v-else>
+		<NavBar />
+		<button @click="logout" class="btn btn-info text-white mt-2 mb-2">Logout</button>
+		<ContainerFluid />
+	</template>
 
 </template>
 
@@ -13,41 +14,26 @@
 import NavBar from './components/NavBar.vue';
 import ContainerFluid from '@/components/ContainerFluid';
 import FormLogin from '@/components/FormLogin';
-import AxiosHttp from './helpers/AxiosHttp';
 import Token from './helpers/Token';
+import AxiosHttp from './helpers/AxiosHttp';
 
 export default {
 	name: 'App',
+	data(){
+		return {
+			loader: false
+		}
+	},
 	methods: {
-		verificaLogin: function (){
-			if(Token().get()){
-				const falha = e => {
-					if(!e.sucesso){
-						Token().remove();
-						this.$store.dispatch({
-							type: 'defineLogado',
-							logado: false
-						});
-					}
-				}
-				AxiosHttp().get('verifica', response => {
-					console.log(response);
-				}, falha);
-			} else {
-				this.$store.dispatch({
-					type: 'defineLogado',
-					logado: false
-				});
-			}
-		},
 		logout: function(){
-			AxiosHttp().post('logout', response => {
+			AxiosHttp().post('logout', {}, response => {
 				if(response.sucesso){
-					Token().remove();
 					this.$store.dispatch({
 						type: 'defineLogado',
 						logado: false
 					});
+					Token().remove();
+					location.reload();
 				}
 			});
 		}
@@ -62,8 +48,11 @@ export default {
 			return this.$store.getters.logado;
 		}
 	},
-	mounted(){
-		this.verificaLogin();
+	watch: {
+		$route(to, from){
+			console.log(to);
+			console.log(from);
+		}
 	}
 }
 </script>

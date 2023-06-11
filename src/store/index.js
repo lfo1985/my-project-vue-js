@@ -5,32 +5,32 @@ import { createStore } from 'vuex';
 const store = createStore({
     state(){
         return {
-            // texto: 'Bla Bla!',
-            logado: Token().get() || false
+            logado: Token().get() || false,
+            rotaAnterior: null
         }
     },
     getters: {
-        // getTexto(state){
-        //     return state.texto;
-        // }
         logado(state) {
             return state.logado;
-        }
+        },
+        rotaAnterior(state){
+            return state.rotaAnterior;
+        }   
     },
     mutations: {
-        // alteraTexto(state, value){
-        //     state.texto = value
-        // }
         alteraEstadoLogado(state, value){
             state.logado = value;
+        },
+        alteraRotaAnterior(state, value){
+            state.rotaAnterior = value;
         }
     },
     actions: {
-        // alteraTexto({commit}, obj){
-        //     commit('alteraTexto', obj.texto);
-        // }
         defineLogado({commit}, obj){
-            commit('alteraEstadoLogado', obj.logado)
+            commit('alteraEstadoLogado', obj.logado);
+        },
+        defineRotaAnterior({commit}, obj){
+            commit('alteraRotaAnterior', obj.rota);
         }
     }
 });

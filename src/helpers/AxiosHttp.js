@@ -25,9 +25,9 @@ function AxiosHttp(){
             });
     }
 
-    function post(route, callback = null, callbackErro = null){
+    function post(route, data = {}, callback = null, callbackErro = null){
         axios
-            .post(config.baseURL + route, {}, options)
+            .post(config.baseURL + route, data, options)
             .then(function(response){
                 if(callback != null){
                     callback(response.data);

@@ -1,7 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import ItensProjetos from '@/components/ItensProjetos';
-import InfoProjeto from '@/components/InfoProjeto'
+import ItensClientes from '@/components/ItensClientes';
+import PaginaHome from '@/components/PaginaHome';
+import InfoCliente from '@/components/InfoCliente';
+import Token from '@/helpers/Token';
+import AxiosHttp from '@/helpers/AxiosHttp';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -9,20 +12,33 @@ const router = createRouter({
         {
             name: 'Home',
             path: '/',
-            component: ItensProjetos
+            component: PaginaHome
         },
         {
-            name: 'InfoProjeto',
-            path: '/info-projeto/:id',
-            component: InfoProjeto
+            name: 'ItensClientes',
+            path: '/clientes',
+            component: ItensClientes
         },
         {
-            name: 'AdicionaProjeto',
-            path: '/adiciona-projeto',
-            component: InfoProjeto
+            name: 'InfoCliente',
+            path: '/cliente/:id',
+            component: InfoCliente
         }
     ]
     
+});
+
+router.beforeEach((to, from, next) => {
+    if(Token().get()){
+        AxiosHttp().get('verifica', () => {
+            next();
+        }, e => {
+            if(!e.sucesso){
+                Token().remove();
+                location.reload();
+            }
+        });
+    }
 });
 
 export default router;

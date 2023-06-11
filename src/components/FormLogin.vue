@@ -15,41 +15,36 @@
   
 <script>
     import AxiosHttp from '@/helpers/AxiosHttp';
-
     export default {
-    name: 'FormLogin',
+        name: 'FormLogin',
         data(){
             return {
-                logado: false,
                 loader: false,
                 dadosLogin: {
                     email: null,
                     password: null
-                },
+                }
             }
         },
         methods: {
             login: function(){
-                
                 this.loader = true;
-
                 const sucesso = r => {
                     if(r.sucesso){
                         this.$store.dispatch({
                             type: 'defineLogado',
                             logado: true
                         });
+                        location.reload();
                     } else {
                         alert(r.msg);
                     }
                     this.loader = false;
                 }
-
                 const erro = e => {
                     alert(e.msg);
                     this.loader = false;
                 }
-
                 AxiosHttp().login({
                     email: this.dadosLogin.email,
                     password: this.dadosLogin.password

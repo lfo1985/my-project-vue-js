@@ -7,9 +7,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <router-link to="/" class="nav-link text-white">
-              Home
-            </router-link>
+            <li class="nav-item">
+              <router-link :to="{name: 'Home'}" class="nav-link text-white">
+                Home
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link  :to="{name: 'ItensClientes'}" class="nav-link text-white">
+                Clientes
+              </router-link>
+            </li>
           </ul>
         </div>
       </div>
