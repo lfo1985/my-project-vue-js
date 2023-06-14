@@ -14,7 +14,7 @@ function AxiosHttp(){
 
     function get(route, callback = null, callbackErro = null){
         axios
-            .get(config.BASE_URL + route, options)
+            .get(config.baseURL + route, options)
             .then(response => {
                 if(callback != null){
                     callback(response.data);
@@ -33,7 +33,7 @@ function AxiosHttp(){
 
     function post(route, data = {}, callback = null, callbackErro = null){
         axios
-            .post(config.BASE_URL + route, data, options)
+            .post(config.baseURL + route, data, options)
             .then(function(response){
                 if(callback != null){
                     callback(response.data);
@@ -52,7 +52,7 @@ function AxiosHttp(){
 
     function login(credentials, callback = null, callbackErro = null){
         axios
-            .post(config.BASE_URL + 'login', {
+            .post(config.baseURL + 'login', {
                 email: credentials.email,
                 password: credentials.password
             }).then(function(response){
@@ -63,7 +63,7 @@ function AxiosHttp(){
                 }
             }).catch(e => {
                 if(callbackErro != null){
-                    callbackErro(e);
+                    callbackErro(e.response.data);
                 }
             });
     }

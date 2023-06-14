@@ -31,7 +31,8 @@
 import AxiosHttp from '@/helpers/AxiosHttp';
 import Token from '@/helpers/Token';
 import Usuario from '@/helpers/Usuario';
-
+import params from '@/store/params';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'NavBar',
@@ -43,14 +44,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+        defineEstadoLoader: 'defineEstadoLoader',
+        defineLogado: 'defineLogado'
+    }),
 		logout: function(){
+
+      this.defineEstadoLoader(params.LOADER_SHOW);
+
 			AxiosHttp().post('logout', {}, response => {
 				if(response.sucesso){
-					this.$store.dispatch(this.config.LOGOUT);
+					this.defineLogado(params.LOGOUT);
 					Token().remove();
 					Usuario().remove();
           this.$router.push('/');
 				}
+        this.defineEstadoLoader(params.LOADER_HIDE);
 			});
 		}
 	}

@@ -1,28 +1,21 @@
 <template>
-	<h5 class="bg-info text-white" v-if="loader">Carregando...</h5>
+	<h4 v-if="loader" class="text-white bg-success p-1 m-0 text-center fs-6 fw-normal">Processando dados, aguarde...</h4>
 	<FormLogin v-if="!logado" />
-	<template v-else>
-		<NavBar />
-		<ContainerFluid />
-	</template>
-
+	<MainPage v-else />
 </template>
 
 <script>
 
-import NavBar from './components/NavBar.vue';
-import ContainerFluid from '@/components/ContainerFluid';
-import FormLogin from '@/components/FormLogin';
+import MainPage from '@/components/Default/MainPage';
+import FormLogin from '@/components/Default/FormLogin';
 import { mapGetters } from 'vuex';
 
 export default {
 	name: 'App',
 	inject: ['config'],
-	
 	components: {
-		NavBar,
-		ContainerFluid,
-		FormLogin
+		FormLogin,
+		MainPage
 	},
 	computed: {
 		...mapGetters([
