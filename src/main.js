@@ -15,6 +15,7 @@ import config from './config';
 
 createApp(App)
     .provide('config', config)
+    .provide('myStore', store)
     .component("fa", icons)
     .use(store)
     .use(router)

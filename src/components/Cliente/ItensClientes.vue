@@ -1,13 +1,11 @@
 <template>
     <div class="text-start">
-
         <h5 class="bg-light d-block p-2 rounded">
             <fa icon="diagram-project" />
             <b>
                 Clientes
             </b>
         </h5>
-        
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,6 +28,8 @@
 <script>
 
 import AxiosHttp from '@/helpers/AxiosHttp';
+import params from '@/store/params';
+import { mapActions } from 'vuex';
 
 export default {
     name: 'ItensClientes',
@@ -39,9 +39,14 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            defineEstadoLoader: 'defineEstadoLoader'
+        }),
         buscaClientes: function(){
+            this.defineEstadoLoader(params.LOADER_SHOW);
             AxiosHttp().get('clientes', response => {
-                this.itensClientes = response.data;
+                this.itensClientes = response.data; 
+                this.defineEstadoLoader(params.LOADER_HIDE);
             });
         }
     },

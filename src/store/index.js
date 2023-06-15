@@ -8,7 +8,8 @@ const store = createStore({
             logado: Token().get() || false,
             rotaAnterior: null,
             loader: false,
-            usuario: null
+            usuario: null,
+            navBar: true
         }
     },
     getters: {
@@ -23,7 +24,10 @@ const store = createStore({
         }, 
         usuario(state){
             return state.usuario;
-        }   
+        },
+        navBar(state){
+            return state.navBar;
+        }
     },
     mutations: {
         alteraEstadoLogado(state, value){
@@ -37,6 +41,9 @@ const store = createStore({
         },
         alteraEstadoUsuario(state, value){
             state.usuario = value;
+        },
+        alteraEstadoNavBar(state, value){
+            state.navBar = value;
         }
     },
     actions: {
@@ -51,6 +58,9 @@ const store = createStore({
         },
         defineEstadoUsuario({commit}, obj){
             commit('alteraEstadoUsuario', obj.usuario);
+        },
+        defineEstadoNavBar({commit}, obj){
+            commit('alteraEstadoNavBar', obj.navBar);
         }
     }
 });

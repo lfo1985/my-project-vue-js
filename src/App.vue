@@ -1,26 +1,29 @@
 <template>
-	<h4 v-if="loader" class="text-white bg-success p-1 m-0 text-center fs-6 fw-normal">Processando dados, aguarde...</h4>
-	<FormLogin v-if="!logado" />
-	<MainPage v-else />
+	<ItemLoader v-if="loader" />
+	<NavBar v-if="navBar" />
+	<div class="container-fluid w-75 mt-3">
+        <router-view />
+    </div>
 </template>
 
 <script>
 
-import MainPage from '@/components/Default/MainPage';
-import FormLogin from '@/components/Default/FormLogin';
 import { mapGetters } from 'vuex';
+import NavBar from './components/Default/NavBar.vue';
+import ItemLoader from '@/components/Default/ItemLoader';
 
 export default {
 	name: 'App',
 	inject: ['config'],
 	components: {
-		FormLogin,
-		MainPage
+		NavBar,
+		ItemLoader
 	},
 	computed: {
 		...mapGetters([
 			'logado',
-			'loader'
+			'loader',
+			'navBar'
 		])
 	}
 }

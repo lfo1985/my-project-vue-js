@@ -8,7 +8,8 @@ import {
     faPlus,
     faArrowLeftLong,
     faCheck,
-    faInfoCircle
+    faInfoCircle,
+    faCircleXmark
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faDiagramProject);
@@ -18,5 +19,6 @@ library.add(faArrowLeftLong);
 library.add(faCheck);
 library.add(faInfo);
 library.add(faInfoCircle);
+library.add(faCircleXmark);
 
 export default FontAwesomeIcon;
